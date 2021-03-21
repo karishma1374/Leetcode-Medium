@@ -1,0 +1,42 @@
+//LEETCODE MEDIUM : 33
+//CODE:
+
+class Solution {
+   public:
+    int search(vector<int> &nums, int target) {
+        int pivot = b_search_pivot(nums);
+        int res1 = b_search(nums, 0, pivot, target);
+        if (res1 != -1) {
+            return res1;
+        }
+        return b_search(nums, pivot, nums.size(), target);
+    }
+
+    static int b_search_pivot(const vector<int> &nums) {
+        int l = 0;
+        int r = nums.size() - 1;
+        while (l < r) {
+            const int m = l + (r - l) / 2;
+            if (nums[m] < nums[r]) {
+                r = m;
+            } else {
+                l = m + 1;
+            }
+        }
+        return l;
+    }
+
+    static int b_search(const vector<int> &nums, int l, int r, int target) {
+        while (l < r) {
+            const int m = l + (r - l) / 2;
+            if (nums[m] < target) {
+                l = m + 1;
+            } else if (nums[m] > target) {
+                r = m;
+            } else {
+                return m;
+            }
+        }
+        return -1;
+    }
+};
