@@ -1,0 +1,16 @@
+//LEETCODE MEDIUM :189
+//CODE
+//if you want , you can copy te code as it is and paste in the leetcode compiler
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) 
+    {  for(int i = 0; i < k; i++)
+        {
+            int tmp = nums[nums.size() - 1];
+            nums.pop_back();
+            nums.insert(nums.begin(), tmp);
+        }
+
+    }
+};
