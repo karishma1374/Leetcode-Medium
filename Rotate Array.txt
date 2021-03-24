@@ -2,7 +2,7 @@
 //CODE
 //if you want , you can copy te code as it is and paste in the leetcode compiler
 
-class Solution {
+class Solution{
 public:
     void rotate(vector<int>& nums, int k) 
     {  for(int i = 0; i < k; i++)
