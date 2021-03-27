@@ -1,0 +1,55 @@
+//APPROACH 1
+//This code works only for positive numbers 
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k)
+    {
+        int i=0; 
+        int j=0;
+        int sum=nums[0];
+        int count=0;
+        while(j<nums.size())
+        {
+             if(sum==k)
+            {
+                count++;
+                j++;  
+            }
+            else if(sum<k)
+            {
+                j=j+1;
+                sum=sum+nums[j];
+            }
+            else
+            {
+                sum=sum-nums[i];
+                i++;   
+            }
+              
+        }
+        return count;
+      
+    }
+};
+
+
+//APPROACH 2
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k)
+    {
+        int count = 0;
+        unordered_map<int, int> seen;
+        
+        int runningSum = 0;
+        for(int& num : nums)
+        {
+            seen[runningSum]++;
+            runningSum += num;
+            count += seen[runningSum - k];
+        }
+        return count;
+    }
+};

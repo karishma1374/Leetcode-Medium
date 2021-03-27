@@ -1,0 +1,42 @@
+//692 Medium
+
+
+class Solution 
+{
+public:
+    struct cmp 
+    {
+            bool operator()(const pair<int,string> &lhs, const pair<int,string> &rhs)
+            {
+              if (lhs.first != rhs.first) return lhs.first < rhs.first;
+              return lhs.second > rhs.second;
+            }
+    };
+    
+    
+    vector<string> topKFrequent(vector<string>& words, int k)
+    {
+         unordered_map<string,int>map;
+        
+        for(string s:words)
+        {
+            map[s]++;
+        }
+        
+        priority_queue<pair<int,string>,vector<pair<int,string>>,cmp>minh;
+        
+        for(auto i = map.begin();i!=map.end();i++)
+        {
+            minh.push({i->second,i->first});      
+        }
+        
+        vector<string>ans;
+        while(k--)
+        {
+            ans.push_back(minh.top().second);
+            minh.pop();
+        }
+        return ans;
+        
+    }
+};
