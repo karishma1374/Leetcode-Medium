@@ -1,0 +1,30 @@
+/*378
+Medium
+
+Code using priority_queue(maxheap)
+
+In a maxheap the top most element is maximum and the rest are arranged in the similar fashion 
+such that every time we get the topmost element as the greatest of all.*/
+
+
+
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        
+        priority_queue<int> maxh;
+        for(int i=0;i<matrix.size();i++)
+        {
+            for(int j=0;j<matrix.size();j++)
+            {
+                maxh.push(matrix[i][j]);
+                if(maxh.size()>k)
+                {
+                    maxh.pop();
+                }
+            }
+        }
+        return maxh.top();
+        
+    }
+};
