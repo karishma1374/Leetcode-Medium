@@ -1,0 +1,41 @@
+/*1753
+
+Code
+
+1. take 2 max from queue, remove 1
+2. Keep increasing score till either of max is 0  */
+
+
+class Solution {
+public:
+    int maximumScore(int a, int b, int c) {
+        priority_queue<int> pq;
+        
+        if(a!=0)
+            pq.push(a);
+        
+        if(b!=0)
+            pq.push(b);
+        
+        if(c!=0)
+            pq.push(c);
+        
+        int result=0;
+        
+        while(pq.size()>=2)
+        {
+            int first = pq.top();
+            pq.pop();
+            int second = pq.top();
+            pq.pop();
+            
+            result++;
+            if(first-1 >0)
+                pq.push(first-1);
+            if(second-1 >0)
+                pq.push(second-1);
+        }
+        
+        return result;
+    }
+};
