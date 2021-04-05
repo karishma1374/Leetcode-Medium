@@ -1,4 +1,7 @@
-/* Approach  to achieve DP Code should be:
+/*
+IT IS AN UNBOUNDED KNAPSACK PROBLEM 
+
+Approach  to achieve DP Code should be:
 
 step 1. recursive code 
 step 2. memoization of recursive code
