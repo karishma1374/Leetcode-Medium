@@ -1,0 +1,11 @@
+//just used an inbuilt function otherwise you can simply use any efficient sorting algorithm
+
+
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) 
+    {
+     sort(nums.begin(),nums.end());
+        return nums;
+    }
+};
