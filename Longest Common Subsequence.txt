@@ -1,0 +1,89 @@
+/*Approach should be :
+
+step 1: Recursive code 
+step 2: Memoization of recursive code
+step 3: Dynamic Programming  */
+
+//Recursive code : gives TLE but focus on concept 🙂
+class Solution {
+public:
+    int  LCS(string text1, string text2, int n , int m)
+    {
+        if(n==0 || m==0) return 0;
+        
+        if(text1[n-1]==text2[m-1])
+        return 1+ LCS(text1,text2,n-1,m-1);
+        
+        else 
+        return max(LCS(text1,text2,n,m-1),LCS(text1,text2,n-1,m));
+    }
+    
+    int longestCommonSubsequence(string text1, string text2) 
+    {
+        int n=text1.size();
+        int m=text2.size();
+        return LCS( text1, text2, n ,m);
+    }
+};
+
+
+
+
+//Memoized code: this might give TLE as well is some type of questions
+class Solution {
+public:
+    vector<vector<int>>t;
+    int  memoized_LCS(string text1, string text2, int n , int m)
+    {
+        if(n==0 || m==0) return 0;
+        if(t[n][m]!=-1) return t[n][m];
+        
+        if(text1[n-1]==text2[m-1])
+        return t[n][m] =1 + memoized_LCS(text1,text2,n-1,m-1);
+        
+        else 
+        return t[n][m] = max(memoized_LCS(text1,text2,n,m-1),memoized_LCS(text1,text2,n-1,m));
+    }
+    
+    int longestCommonSubsequence(string text1, string text2) 
+    {
+        int n=text1.size();
+        int m=text2.size();
+        
+        t.resize(n+2,vector<int>(m+2,-1));
+        
+        return memoized_LCS( text1, text2, n ,m);
+    }
+};
+
+
+
+
+//Dynamic programming code 
+class Solution {
+public:
+   
+    int longestCommonSubsequence(string text1, string text2) {
+        int n=text1.size(),m=text2.size();
+        int t[n+1][m+1];
+        
+        for(int i=0;i<n+1;i++)  t[i][0]=0;
+      
+        for(int i=0;i<m+1;i++)  t[0][i]=0;
+    
+        for(int i=1;i<n+1;i++)
+           for(int j=1;j<m+1;j++)
+            {
+               if(text1[i-1]==text2[j-1])
+               {
+                  t[i][j]= 1+ t[i-1][j-1];
+               }
+                else
+                {
+                   t[i][j]=max(t[i-1][j],t[i][j-1]);
+                } 
+            }
+      
+        return t[n][m];
+    }
+};
