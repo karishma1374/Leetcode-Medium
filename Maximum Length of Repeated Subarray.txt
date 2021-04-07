@@ -1,0 +1,35 @@
+/* Another interesting DP question 
+Just a variation of Longest common substring 
+
+CODE :  */
+
+
+class Solution {
+public:
+    int findLength(vector<int>& A, vector<int>& B) {
+        int n=A.size(),m=B.size();
+        int t[n+1][m+1];
+        int mx=0;// maximum length substring can exist anywhere in the matrix ,just think about it
+        
+        for(int i=0;i<n+1;i++)  t[i][0]=0;
+      
+        for(int i=0;i<m+1;i++)  t[0][i]=0;
+    
+        for(int i=1;i<n+1;i++)
+           for(int j=1;j<m+1;j++)
+            {
+               if(A[i-1]==B[j-1])
+               {
+                  t[i][j]= 1+ t[i-1][j-1];
+                   mx=max(mx,t[i][j]);//storing whatever maximum length we are receiving each time
+                   
+               }
+                else
+                {
+                   t[i][j]=0;
+                } 
+            }
+      
+        return mx;//return the max length
+    }
+};
