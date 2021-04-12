@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) 
+    {
+        int n =nums.size();
+       
+        int arr[n+100]; 
+        int ans;
+        memset(arr , 0 , sizeof(arr));
+   
+       for (int i = 0; i < n; i++) 
+       { 
+
+        {
+         arr[nums[i]]++;    
+        }
+         
+        } 
+        
+ 
+        for (int i = 1; i <= n+100; i++)
+        { 
+        if (arr[i]>=2) 
+        { 
+            ans=i;
+            break;
+        }    
+        }
+       return ans;
+    }
+};
