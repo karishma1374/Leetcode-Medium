@@ -1,0 +1,37 @@
+/* just use LCS code and a little bit modification :
+As LPS is nothing but LCS (STRING, REVERSED_STRING);
+
+DP CODE:*/
+
+
+class Solution {
+public:
+
+    int longestPalindromeSubseq(string s)
+    {
+        string w=s;
+        reverse(s.begin(),s.end());
+        int n=s.size();
+        int m=n;//since both are similar strings 
+        int t[n+1][m+1];//since both n & m are equal it doesnt matter 
+        
+        for(int i=0;i<n+1;i++)  t[i][0]=0;
+      
+        for(int i=0;i<m+1;i++)  t[0][i]=0;
+    
+        for(int i=1;i<n+1;i++)
+           for(int j=1;j<m+1;j++)
+            {
+               if(s[i-1]==w[j-1])
+               {
+                  t[i][j]= 1+ t[i-1][j-1];
+               }
+                else
+                {
+                   t[i][j]=max(t[i-1][j],t[i][j-1]);
+                } 
+            }
+      
+        return t[n][m];
+    }
+};
