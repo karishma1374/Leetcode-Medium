@@ -1,0 +1,102 @@
+/*This method uses Sorting to arrive at the correct result and is solved in O(n2) time, without using extra space
+Algorithm:
+
+    Sort the array in ascending order.
+    Traverse the array from start to end.
+    For every index i, create two variables l = i + 1 and r = n – 1
+    Run a loop until l is less than r, if the sum of array[l], array[r] is equal to zero then print the triplet and break the loop
+    If the sum is less than zero then increment value of l, by increasing value of l the sum will increase as the array is sorted, so array[l+1] > array [l]
+    If the sum is greater than zero then decrement value of r, by increasing value of l the sum will decrease as the array is sorted, so array[r-1] < array [r].*/
+
+
+
+
+
+
+
+//-----------------------TWO POINTER  100 ms ----------------------------> 
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+   
+        vector<vector<int>> res;
+        sort(nums.begin(),nums.end());//sort
+        
+        for(unsigned int i = 0; i < nums.size();i++){
+
+           //to handle duplicates
+            if(i > 0 && nums[i]==nums[i-1])
+                continue;
+            // initialize left and right 
+            int l = i + 1; 
+            int r = nums.size() - 1; 
+            int x = nums[i]; 
+            
+            while (l < r) 
+            {    
+                if (x + nums[l] + nums[r] == 0)
+                {
+                    res.push_back(vector<int>{x,nums[l],nums[r]});
+                    //to handle duplicates
+                    while (l<r && nums[l] == nums[l+1]) 
+                        l++;
+                    // to handle duplicates
+                    while (l<r && nums[r] == nums[r-1]) 
+                        r--;
+                    l++;
+                    r--;
+                    //break;
+                }
+                // If sum of three elements is less than zero then increment in left 
+                else if (x + nums[l] + nums[r] < 0) 
+                    l++; 
+  
+                // if sum is greater than zero then decrement in right side 
+                else
+                    r--; 
+            }
+                
+        }
+        return res;
+    }
+};
+
+
+
+
+
+
+
+//---------------TWO POINTER : 64 ms ----------------------
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+              
+        sort(nums.begin(),nums.end());//sort for two pointer  approach 
+        int n=nums.size();
+        vector<vector<int>> res;
+        for(int i=0;i<n-2;i++)  //little modification here leads to less tc
+        {
+               if(i>0 && (nums[i]==nums[i-1]) )continue; //to handle duplicates
+               int l=i+1, r= n-1; // initialize left and right 
+               while(l<r)
+               {
+                   int sum =nums[i]+nums[l]+nums[r];
+                   
+                   if(sum<0) l++;
+                   else if(sum>0)r--;
+                   else 
+                   {
+                       res.push_back(vector<int>{nums[i],nums[l],nums[r]});
+                       while(l+1<r && nums[l]==nums[l+1])l++;
+                       while(l<r-1 && nums[r]==nums[r-1]) r--;
+                       l++; r--;
+                   }
+               }
+        }
+       
+        return res;
+
+    }
+};
+
