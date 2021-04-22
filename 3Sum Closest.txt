@@ -1,0 +1,54 @@
+/*
+Algorithm:
+
+*Initialize the minimum difference diff with a large value.
+*Sort the input array nums.
+*Iterate through the array:
+*For the current position i, set lo to i + 1, and hi to the last index.
+*While the lo pointer is smaller than hi:
+ ->>Set sum to nums[i] + nums[lo] + nums[hi].
+ ->>If the absolute difference between sum and target is smaller than the absolute value of diff:
+      >>Set diff to target - sum.
+ ->>If sum is less than target, increment low.
+ ->>Else, decrement high
+ 
+If diff is zero, break from the loop.
+          
+Return the value of the closest triplet, which is target - diff.*/
+
+
+
+
+
+
+
+
+
+//-----------------------TWO POINTER --------------------------------
+
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+    int diff = INT_MAX;
+    int n = nums.size();
+    sort(begin(nums), end(nums));
+        
+    for (int i = 0; i < n  && diff != 0; ++i) //diff agr 0 hoga to matlab target aur closest sum same hai>>> If diff is zero, break from the loop and directly the same target value will be returned in the last line  
+    {
+        int low = i + 1;
+        int high = n - 1;
+        while (low < high)
+        {
+            int sum = nums[i] + nums[low] + nums[high];
+            if (abs(target - sum) < abs(diff))
+                diff = target - sum;
+            if (sum < target)
+                low++;
+            else
+                high--;
+        }
+    }
+    return target - diff;
+}
+};
+
